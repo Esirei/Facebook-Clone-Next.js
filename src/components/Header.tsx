@@ -1,4 +1,4 @@
-import { signout, useSession } from 'next-auth/client';
+import { signOut, useSession } from 'next-auth/client';
 import Image from 'next/image';
 import {
   BellIcon,
@@ -17,12 +17,12 @@ const Header = () => {
     <div className="flex sticky top-0 z-50 bg-white p-2 lg:px-5 shadow-md">
       <div className="flex items-center">
         <Image src="/images/logo.png" width={40} height={40} layout="fixed" />
-        <div className="flex flex-row items-center ml-2 rounded-full bg-gray-100 p-2">
+        <div className="hidden md:inline-flex items-center ml-2 rounded-full bg-gray-100 p-2">
           <SearchIcon className="h-6 text-gray-600" />
           <input
             type="text"
             placeholder="Search Facebook"
-            className="hidden md:inline-flex ml-2 bg-transparent outline-none placeholder-gray-500"
+            className="hidden lg:inline-flex flex-shrink ml-2 bg-transparent outline-none placeholder-gray-500"
           />
         </div>
       </div>
@@ -45,9 +45,11 @@ const Header = () => {
           height={40}
           layout="fixed"
           className="cursor-pointer rounded-full"
-          onClick={() => signout()}
+          onClick={() => signOut()}
         />
-        <p className="whitespace-nowrap font-semibold pr-3">{session.user.name}</p>
+        <p className="hidden lg:inline-flex whitespace-nowrap font-semibold pr-3">
+          {session.user.name}
+        </p>
         <ViewGridIcon className="icon" />
         <ChatIcon className="icon" />
         <BellIcon className="icon" />
