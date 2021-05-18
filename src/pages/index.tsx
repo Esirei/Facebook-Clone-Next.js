@@ -4,6 +4,7 @@ import { getSession } from 'next-auth/client';
 import Head from 'next/head';
 import Header from '~/components/Header';
 import Login from '~/components/Login';
+import Sidebar from '~/components/Sidebar';
 
 interface Props {
   session?: Session;
@@ -22,8 +23,8 @@ export default function Home({ session }: Props) {
 
       <Header />
 
-      <main>
-        {/* Sidebar */}
+      <main className="flex">
+        <Sidebar />
 
         {/* Feed */}
 
