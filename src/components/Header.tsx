@@ -1,3 +1,4 @@
+import { signout, useSession } from 'next-auth/client';
 import Image from 'next/image';
 import {
   BellIcon,
@@ -10,39 +11,50 @@ import {
 import { FlagIcon, PlayIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/outline';
 import HeaderIcon from './HeaderIcon';
 
-const Header = () => (
-  <div className="flex sticky top-0 z-50 bg-white p-2 lg:px-5 shadow-md">
-    <div className="flex items-center">
-      <Image src="/images/logo.png" width={40} height={40} layout="fixed" />
-      <div className="flex flex-row items-center ml-2 rounded-full bg-gray-100 p-2">
-        <SearchIcon className="h-6 text-gray-600" />
-        <input
-          type="text"
-          placeholder="Search Facebook"
-          className="hidden md:inline-flex ml-2 bg-transparent outline-none placeholder-gray-500"
+const Header = () => {
+  const [session] = useSession();
+  return (
+    <div className="flex sticky top-0 z-50 bg-white p-2 lg:px-5 shadow-md">
+      <div className="flex items-center">
+        <Image src="/images/logo.png" width={40} height={40} layout="fixed" />
+        <div className="flex flex-row items-center ml-2 rounded-full bg-gray-100 p-2">
+          <SearchIcon className="h-6 text-gray-600" />
+          <input
+            type="text"
+            placeholder="Search Facebook"
+            className="hidden md:inline-flex ml-2 bg-transparent outline-none placeholder-gray-500"
+          />
+        </div>
+      </div>
+
+      <div className="flex justify-center flex-1">
+        <div className="flex space-x-6 md:space-x-2">
+          <HeaderIcon Icon={HomeIcon} active />
+          <HeaderIcon Icon={FlagIcon} />
+          <HeaderIcon Icon={PlayIcon} />
+          <HeaderIcon Icon={ShoppingCartIcon} />
+          <HeaderIcon Icon={UserGroupIcon} />
+        </div>
+      </div>
+
+      <div className="flex items-center sm:space-x-2 justify-end">
+        {/*Profile pic*/}
+        <Image
+          src={session.user.image}
+          width={40}
+          height={40}
+          layout="fixed"
+          className="cursor-pointer rounded-full"
+          onClick={() => signout()}
         />
+        <p className="whitespace-nowrap font-semibold pr-3">{session.user.name}</p>
+        <ViewGridIcon className="icon" />
+        <ChatIcon className="icon" />
+        <BellIcon className="icon" />
+        <ChevronDownIcon className="icon" />
       </div>
     </div>
-
-    <div className="flex justify-center flex-1">
-      <div className="flex space-x-6 md:space-x-2">
-        <HeaderIcon Icon={HomeIcon} active />
-        <HeaderIcon Icon={FlagIcon} />
-        <HeaderIcon Icon={PlayIcon} />
-        <HeaderIcon Icon={ShoppingCartIcon} />
-        <HeaderIcon Icon={UserGroupIcon} />
-      </div>
-    </div>
-
-    <div className="flex items-center sm:space-x-2 justify-end">
-      {/*Profile pic*/}
-      <p className="whitespace-nowrap font-semibold pr-3">Akpesiri Okorigba</p>
-      <ViewGridIcon className="icon" />
-      <ChatIcon className="icon" />
-      <BellIcon className="icon" />
-      <ChevronDownIcon className="icon" />
-    </div>
-  </div>
-);
+  );
+};
 
 export default Header;
