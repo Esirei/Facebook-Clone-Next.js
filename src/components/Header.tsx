@@ -1,6 +1,13 @@
-import { FlagIcon, PlayIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/outline';
-import { HomeIcon, UserGroupIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
+import {
+  BellIcon,
+  ChatIcon,
+  ChevronDownIcon,
+  HomeIcon,
+  UserGroupIcon,
+  ViewGridIcon,
+} from '@heroicons/react/solid';
+import { FlagIcon, PlayIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/outline';
 import HeaderIcon from './HeaderIcon';
 
 const Header = () => (
@@ -25,6 +32,15 @@ const Header = () => (
         <HeaderIcon Icon={ShoppingCartIcon} />
         <HeaderIcon Icon={UserGroupIcon} />
       </div>
+    </div>
+
+    <div className="flex items-center sm:space-x-2 justify-end">
+      {/*Profile pic*/}
+      <p className="whitespace-nowrap font-semibold pr-3">Akpesiri Okorigba</p>
+      <ViewGridIcon className="icon" />
+      <ChatIcon className="icon" />
+      <BellIcon className="icon" />
+      <ChevronDownIcon className="icon" />
     </div>
   </div>
 );
