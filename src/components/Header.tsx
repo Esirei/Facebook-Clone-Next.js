@@ -1,5 +1,7 @@
-import { SearchIcon } from '@heroicons/react/outline';
+import { FlagIcon, PlayIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/outline';
+import { HomeIcon, UserGroupIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
+import HeaderIcon from './HeaderIcon';
 
 const Header = () => (
   <div className="flex sticky top-0 z-50 bg-white p-2 lg:px-5 shadow-md">
@@ -12,6 +14,16 @@ const Header = () => (
           placeholder="Search Facebook"
           className="hidden md:inline-flex ml-2 bg-transparent outline-none placeholder-gray-500"
         />
+      </div>
+    </div>
+
+    <div className="flex justify-center flex-1">
+      <div className="flex space-x-6 md:space-x-2">
+        <HeaderIcon Icon={HomeIcon} active />
+        <HeaderIcon Icon={FlagIcon} />
+        <HeaderIcon Icon={PlayIcon} />
+        <HeaderIcon Icon={ShoppingCartIcon} />
+        <HeaderIcon Icon={UserGroupIcon} />
       </div>
     </div>
   </div>
