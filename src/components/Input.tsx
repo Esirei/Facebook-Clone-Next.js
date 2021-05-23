@@ -27,7 +27,7 @@ const Input = () => {
   };
 
   return (
-    <div className="bg-white py-3 px-4 rounded-2xl shadow-md text-gray-500 font-medium mt-6">
+    <div className="bg-white py-3 px-4 rounded-2xl shadow-md text-gray-500 mt-6">
       <div className="flex space-x-4 pb-3 items-center">
         <Image
           src={session.user.image}
@@ -50,20 +50,20 @@ const Input = () => {
       </div>
 
       <div className="flex justify-evenly pt-2 border-t">
-        <div className="flex items-center space-x-1 hover:bg-gray-100 flex-1 justify-center p-2 rounded-xl cursor-pointer">
+        <button className="input-button">
           <VideoCameraIcon className="h-7 text-red-500" />
           <p className="text-xs sm:text-sm xl:text-base">Live Video</p>
-        </div>
+        </button>
 
-        <div className="flex items-center space-x-1 hover:bg-gray-100 flex-1 justify-center p-2 rounded-xl cursor-pointer">
+        <button className="input-button">
           <CameraIcon className="h-7 text-green-400" />
           <p className="text-xs sm:text-sm xl:text-base">Photo/Video</p>
-        </div>
+        </button>
 
-        <div className="flex items-center space-x-1 hover:bg-gray-100 flex-1 justify-center p-2 rounded-xl cursor-pointer">
+        <button className="input-button">
           <EmojiHappyIcon className="h-7 text-yellow-300" />
           <p className="text-xs sm:text-sm xl:text-base">Felling/Activity</p>
-        </div>
+        </button>
       </div>
     </div>
   );

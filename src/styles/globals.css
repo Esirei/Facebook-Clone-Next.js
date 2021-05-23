@@ -7,4 +7,9 @@
         @apply hidden xl:inline-flex p-2 h-10 w-10 bg-gray-200 text-gray-700 rounded-full
         cursor-pointer hover:bg-gray-300;
     }
+
+    .input-button {
+        @apply focus:outline-none font-medium flex items-center space-x-1 hover:bg-gray-100 flex-1
+        justify-center p-2 rounded-xl;
+    }
 }
