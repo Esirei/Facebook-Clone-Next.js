@@ -7,7 +7,7 @@ const Sidebar = () => {
   const [session] = useSession();
   return (
     <div className="px-2 max-w-[360px] xl:min-w-[300px]">
-      <div className="sticky top-[72px] py-2 sm:py-4">
+      <div className="sticky top-[72px] pt-2 sm:pt-4 pb-[72px] max-h-screen overflow-y-auto">
         <SidebarItem src={session.user.image} title={session.user.name} />
         <SidebarItem Icon={UsersIcon} title="Friends" />
         <SidebarItem Icon={UserGroupIcon} title="Groups" />
