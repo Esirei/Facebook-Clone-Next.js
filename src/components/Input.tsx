@@ -1,15 +1,29 @@
 import { useSession } from 'next-auth/client';
 import Image from 'next/image';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useRef } from 'react';
 import { EmojiHappyIcon } from '@heroicons/react/outline';
 import { CameraIcon, VideoCameraIcon } from '@heroicons/react/solid';
+import firebase, { db } from '~/lib/firebase';
 
 const Input = () => {
   const [session] = useSession();
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const placeHolderName = session?.user.name.split(' ')[0];
 
   const post: MouseEventHandler<HTMLButtonElement> = e => {
     e.preventDefault();
+
+    const message = inputRef.current.value;
+    if (!message) return;
+
+    db.collection('posts').add({
+      ...session.user,
+      message,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    inputRef.current.value = '';
   };
 
   return (
@@ -25,6 +39,7 @@ const Input = () => {
         <form className="flex flex-1">
           <input
             type="text"
+            ref={inputRef}
             placeholder={`What's on your mind, ${placeHolderName}?`}
             className="rounded-full h-10 bg-gray-100 flex-1 px-5 outline-none"
           />
