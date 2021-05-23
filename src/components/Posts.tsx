@@ -1,15 +1,21 @@
+import { FC } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '~/lib/firebase';
 import Post from './Post';
 
-const Posts = () => {
+interface Props {
+  posts: [];
+}
+
+const Posts: FC<Props> = ({ posts }) => {
   const query = db.collection('posts').orderBy('timestamp', 'desc');
   const [postsDoc, loading, error] = useCollection(query);
+  const currentPosts = postsDoc?.docs.map(post => ({ id: post.id, ...post.data() })) || posts;
   return (
     <div>
-      {postsDoc?.docs.map(post => (
+      {currentPosts.map(post => (
         // @ts-ignore
-        <Post key={post.id} {...post.data()} />
+        <Post key={post.id} {...post} />
       ))}
     </div>
   );

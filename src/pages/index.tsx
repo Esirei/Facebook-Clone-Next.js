@@ -7,12 +7,14 @@ import Header from '~/components/Header';
 import Login from '~/components/Login';
 import Sidebar from '~/components/Sidebar';
 import Widgets from '~/components/Widgets';
+import { db } from '~/lib/firebase';
 
 interface Props {
   session?: Session;
+  posts: [];
 }
 
-export default function Home({ session }: Props) {
+export default function Home({ session, posts }: Props) {
   if (!session) return <Login />;
 
   return (
@@ -27,16 +29,18 @@ export default function Home({ session }: Props) {
 
       <main className="flex">
         <Sidebar />
-        <Feed />
+        <Feed posts={posts} />
         <Widgets />
       </main>
     </div>
   );
 }
 
-type SSProps = Pick<Props, 'session'>;
+type SSProps = Pick<Props, 'session' | 'posts'>;
 
 export const getServerSideProps: GetServerSideProps<SSProps> = async context => {
   const session = await getSession(context);
-  return { props: { session } };
+  const postsDoc = await db.collection('posts').orderBy('timestamp', 'desc').get();
+  const posts = postsDoc.docs.map(post => ({ id: post.id, ...post.data(), timestamp: null })) as [];
+  return { props: { session, posts } };
 };
